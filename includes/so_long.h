@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 13:14:45 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/26 16:07:57 by itahri           ###   ########.fr       */
+/*   Updated: 2024/06/26 19:06:01 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef struct s_coord
 	int	x;
 	int	y;
 }		t_coord;
-
-# define NO_POS ((s_coord){0, 0})
 
 typedef struct s_map
 {
