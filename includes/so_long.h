@@ -6,12 +6,13 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 13:14:45 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/25 19:20:12 by itahri           ###   ########.fr       */
+/*   Updated: 2024/06/26 16:07:57 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -23,6 +24,8 @@ typedef struct s_coord
 	int	x;
 	int	y;
 }		t_coord;
+
+# define NO_POS ((s_coord){0, 0})
 
 typedef struct s_map
 {
@@ -36,5 +39,8 @@ t_coord	file_len(const char** argv);
 t_map	*map_allocation(const char** argv);
 t_map	*map_formating(const char **argv);
 void	free_map(t_map *map);
+
+// map validity check
+int	cross_check(t_map *map);
 
 #endif

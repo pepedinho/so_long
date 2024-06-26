@@ -6,14 +6,14 @@
 #    By: itahri <itahri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/25 13:12:50 by itahri            #+#    #+#              #
-#    Updated: 2024/06/25 16:11:59 by itahri           ###   ########.fr        #
+#    Updated: 2024/06/26 18:42:40 by itahri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 
-SRCS = $(addprefix srcs/,  main.c map_parsing.c)
+SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c)
 
 INCLUDES = ./includes -I ./libft/includes/
 
@@ -44,6 +44,7 @@ $(NAME): $(OBJS)
 clean:
 	rm -f $(OBJS)
 	make clean -C ./libft
+	make clean -C $(MINI_LIBX_DIR)
 
 fclean: clean
 	rm -f $(NAME)

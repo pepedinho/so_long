@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:30:30 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/25 19:20:29 by itahri           ###   ########.fr       */
+/*   Updated: 2024/06/26 15:03:18 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ int main(int argc, char const *argv[])
 	int i = 0;
 	while (i < map->coord.y)
 		ft_printf("%s\n", map->map[i++]);
+	if (cross_check(map))
+		ft_printf("map correct\n");
+	else
+		ft_printf("map incorrect\n");
+	i = 0;
+	while (i < map->coord.y)
+		ft_printf("%s\n", map->map[i++]);
+
 	free_map(map);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:13 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/25 19:23:00 by itahri           ###   ########.fr       */
+/*   Updated: 2024/06/26 18:41:01 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_coord	file_len(const char** argv)
 	map = open(argv[1], O_RDONLY);
 	nb_read = -1;
 	pos.y = 0;
+	pos.x = 0;
 	while (nb_read != 0)
 	{
 		nb_read = read(map, buffer, 100);
@@ -34,7 +35,12 @@ t_coord	file_len(const char** argv)
 			if (buffer[i] == '\n')
 			{
 				if (pos.y == 0)
+				{
 					pos.x = i;
+					pos.y++;
+				}
+				while (buffer[i] == '\n')
+					i++;
 				pos.y++;
 			}
 			i++;
@@ -98,7 +104,7 @@ t_map	*map_formating(const char **argv)
 	map = map_allocation(argv);
 	if (!map)
 		return (NULL);
-	buffer = malloc(sizeof(char) * ((map->coord.x * map->coord.y) + map->coord.y));
+	buffer = ft_calloc(sizeof(char), ((map->coord.x * map->coord.y) + map->coord.y));
 	if (!buffer)
 		return (free_map(map), NULL);
 	fd = open(argv[1], O_RDONLY);
@@ -112,7 +118,8 @@ t_map	*map_formating(const char **argv)
 		index.x = 0;
 		while (index.x < map->coord.x && buffer[k] != '\n')
 			map->map[index.y][index.x++] = buffer[k++];
-		k++;
+		while (buffer[k] == '\n')
+			k++;
 		map->map[index.y][index.x] = '\0';
 		index.y++;
 	}
