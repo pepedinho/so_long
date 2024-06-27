@@ -24,22 +24,22 @@ int	fill(t_map *map, t_coord pos)
 	w_count = 0;
 	if (pos.x < map->coord.x && pos.y < map->coord.y)
 	{
-		if (map->map[pos.y + 1][pos.x] != '1' && map->map[pos.y + 1][pos.x] != 'E')
+		if (map->map[pos.y + 1][pos.x] != '1' && map->map[pos.y + 1][pos.x] != 'E' && map->map[pos.y + 1][pos.x] != 'C')
 			map->map[pos.y + 1][pos.x] = 'P';
 		else
 			w_count++;
-		if (map->map[pos.y][pos.x + 1] != '1' && map->map[pos.y][pos.x + 1] != 'E')
+		if (map->map[pos.y][pos.x + 1] != '1' && map->map[pos.y][pos.x + 1] != 'E' && map->map[pos.y][pos.x + 1] != 'C')
 			map->map[pos.y][pos.x + 1] = 'P';
 		else
 			w_count++;
 	}
 	if (pos.y > 0 && pos.x > 0)
 	{
-		if (map->map[pos.y][pos.x - 1] != '1' && map->map[pos.y][pos.x - 1] != 'E')
+		if (map->map[pos.y][pos.x - 1] != '1' && map->map[pos.y][pos.x - 1] != 'E' && map->map[pos.y][pos.x - 1] != 'C')
 			map->map[pos.y][pos.x - 1] = 'P';
 		else
 			w_count++;
-		if (map->map[pos.y - 1][pos.x] != '1' && map->map[pos.y - 1][pos.x] != 'E')
+		if (map->map[pos.y - 1][pos.x] != '1' && map->map[pos.y - 1][pos.x] != 'E' && map->map[pos.y - 1][pos.x] != 'C')
 			map->map[pos.y - 1][pos.x] = 'P';
 		else
 			w_count++;
@@ -122,12 +122,43 @@ void  bottom_checking(t_map *map)
 	}
 }
 
+int	check_wall(t_map *map)
+{
+	t_coord	pos;
+
+	pos.y = 0;
+	pos.x = 0;
+	while (pos.y < map->coord.y - 1 && map->map[pos.y])
+	{
+		if (map->map[pos.y++][0] != '1')
+			return (0);
+	}
+	while (pos.x < map->coord.x && map->map[0][pos.x])
+	{
+		if (map->map[0][pos.x++] != '1')
+			return (0);
+	}
+	pos.y = 0;
+	while (pos.y < map->coord.y - 1 && map->map[pos.y])
+	{
+		if (map->map[pos.y++][map->coord.x - 1] != '1')
+			return (0);
+	}
+	pos.x = 0;
+	ft_printf("deb[5] y = %d : %c\n", map->coord.y, map->map[map->coord.y - 1][pos.x]);
+	while (pos.x < map->coord.x && map->map[map->coord.y - 1][pos.x])
+	{
+		if (map->map[map->coord.y - 1][pos.x++] != '1')
+			return (0);
+	}
+	return (1);
+}
+
 void top_checking(t_map *map)
 {
 	t_coord	pos;
 
 	pos.y = map->coord.y - 1;
-	ft_printf("[2] begin y : %d\n", pos.y);
 	while (pos.y > 0)
 	{
 		pos.x = 0;
@@ -157,14 +188,36 @@ void top_checking(t_map *map)
 int	cross_check(t_map *map)
 {
 	t_coord	dest;
+	t_coord	pos;
 	int		i;
 
 	i = 0;
+	if (!check_wall(map))
+		return (0);
 	dest = get_exit_coord(map);
 	while (i < 2)
 	{
 		top_checking(map);
 		i++;
 	}
+	i = 0;
+	pos.y = 0;
+	while (pos.y < map->coord.y)
+	{
+		pos.x = 0;
+		while (pos.x < map->coord.x)
+		{
+			if (map->map[pos.y][pos.x] == 'C')
+			{
+				if (!check_arround(map, pos))
+					return (0);
+				i++;
+			}
+			pos.x++;
+		}
+		pos.y++;
+	}
+	if (i == 0)
+		return (0);
 	return (check_arround(map, dest));
 }

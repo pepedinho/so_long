@@ -35,10 +35,7 @@ t_coord	file_len(const char** argv)
 			if (buffer[i] == '\n')
 			{
 				if (pos.y == 0)
-				{
 					pos.x = i;
-					pos.y++;
-				}
 				while (buffer[i] == '\n')
 					i++;
 				pos.y++;
@@ -46,7 +43,7 @@ t_coord	file_len(const char** argv)
 			i++;
 		}
 	}
-	return (pos.y++, close(map), pos);
+	return (close(map), pos);
 }
 
 
