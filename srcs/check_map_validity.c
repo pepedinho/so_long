@@ -154,6 +154,37 @@ int	check_wall(t_map *map)
 	return (1);
 }
 
+int	check_elem(t_map *map)
+{
+	int c_count;
+	int p_count;
+	int e_count;
+	t_coord pos;
+
+	c_count = 0;
+	p_count = 0;
+	e_count = 0;
+	pos.y = 0;
+	while (pos.y < map->coord.y)
+	{
+		pos.x = 0;
+		while (pos.x < map->coord.x)
+		{
+			if (map->map[pos.y][pos.x] == 'C')
+				c_count++;
+			else if (map->map[pos.y][pos.x] == 'P')
+				p_count++;
+			else if (map->map[pos.y][pos.x] == 'E')
+				e_count++;
+			pos.x++;
+		}
+		pos.y++;
+	}
+	if (c_count > 0 && p_count == 1 && e_count == 1)
+		return (1);
+	return (0);
+}
+
 void top_checking(t_map *map)
 {
 	t_coord	pos;
@@ -192,7 +223,7 @@ int	cross_check(t_map *map)
 	int		i;
 
 	i = 0;
-	if (!check_wall(map))
+	if (!check_wall(map) || !check_elem(map))
 		return (0);
 	dest = get_exit_coord(map);
 	while (i < 2)

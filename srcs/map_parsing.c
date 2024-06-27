@@ -101,7 +101,7 @@ t_map	*map_formating(const char **argv)
 	map = map_allocation(argv);
 	if (!map)
 		return (NULL);
-	buffer = ft_calloc(sizeof(char), ((map->coord.x * map->coord.y) + map->coord.y));
+	buffer = ft_calloc(sizeof(char), ((map->coord.x * map->coord.y) + map->coord.y + 1));
 	if (!buffer)
 		return (free_map(map), NULL);
 	fd = open(argv[1], O_RDONLY);
