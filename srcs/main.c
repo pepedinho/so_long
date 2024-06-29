@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
 	while (i < map->coord.y)
 		ft_printf("%s\n", map->map[i++]);
 	if (cross_check(map))
-		ft_printf("map correct\n");
+		ft_printf("collectible : %d \nmap correct\n", map->collectible_cnt);
 	else
 		ft_printf("map incorrect\n");
 	i = 0;

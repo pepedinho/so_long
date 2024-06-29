@@ -29,6 +29,7 @@ typedef struct s_map
 {
 	char			**map;
 	struct s_coord	coord;
+	int				collectible_cnt;
 }					t_map;
 
 

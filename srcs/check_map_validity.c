@@ -145,7 +145,6 @@ int	check_wall(t_map *map)
 			return (0);
 	}
 	pos.x = 0;
-	ft_printf("deb[5] y = %d : %c\n", map->coord.y, map->map[map->coord.y - 1][pos.x]);
 	while (pos.x < map->coord.x && map->map[map->coord.y - 1][pos.x])
 	{
 		if (map->map[map->coord.y - 1][pos.x++] != '1')
@@ -180,6 +179,7 @@ int	check_elem(t_map *map)
 		}
 		pos.y++;
 	}
+	map->collectible_cnt = c_count;
 	if (c_count > 0 && p_count == 1 && e_count == 1)
 		return (1);
 	return (0);
