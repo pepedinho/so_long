@@ -36,8 +36,8 @@ t_coord	file_len(const char** argv)
 			{
 				if (pos.y == 0)
 					pos.x = i;
-				while (buffer[i] == '\n')
-					i++;
+				if (buffer[i + 1] == '\n')
+					(ft_printf("Error\n"), exit(EXIT_FAILURE));
 				pos.y++;
 			}
 			i++;
@@ -54,10 +54,10 @@ t_map	*map_allocation(const char **argv)
 	char	**buffer;
 	int		i;
 
+	pos = file_len(argv);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
-	pos = file_len(argv);
 	buffer = malloc(sizeof(char *) * (pos.y + 1));
 	if (!buffer)
 		return (free(map), NULL);

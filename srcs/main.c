@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:30:30 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/26 15:03:18 by itahri           ###   ########.fr       */
+/*   Updated: 2024/06/29 16:59:12 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main(int argc, char const *argv[])
 {
-	t_map	*map;
+	t_map		  *map;
+	t_mlx_data	  *data;
 
 	(void)argv;
 	if (argc != 2)
@@ -32,7 +33,12 @@ int main(int argc, char const *argv[])
 	i = 0;
 	while (i < map->coord.y)
 		ft_printf("%s\n", map->map[i++]);
-
 	free_map(map);
+	data = create_window();
+	if (!data)
+		return (-1);
+	mlx_key_hook(data->win_ptr, handle_input, data);
+	mlx_loop(data->mlx_ptr);
 	return 0;
+
 }

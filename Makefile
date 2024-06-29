@@ -6,14 +6,14 @@
 #    By: itahri <itahri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/25 13:12:50 by itahri            #+#    #+#              #
-#    Updated: 2024/06/26 18:42:40 by itahri           ###   ########.fr        #
+#    Updated: 2024/06/29 16:22:13 by itahri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 
-SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c)
+SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c windows_management.c)
 
 INCLUDES = ./includes -I ./libft/includes/
 
@@ -39,7 +39,7 @@ $(MINI_LIBX) :
 	make -C $(MINI_LIBX_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -I $(INCLUDES)  $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft 
+	$(CC) $(CFLAGS) -I $(INCLUDES)  $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft -L$(MINI_LIBX_DIR) -lmlx -lX11 -lXext
 
 clean:
 	rm -f $(OBJS)
