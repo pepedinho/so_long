@@ -13,7 +13,7 @@
 
 CC = cc
 
-SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c windows_management.c)
+SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c windows_management.c map_rendering.c)
 
 INCLUDES = ./includes -I ./libft/includes/
 

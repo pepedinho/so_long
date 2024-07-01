@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:13 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/26 18:41:01 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/01 13:16:48 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_map	*map_formating(const char **argv)
 	fd = open(argv[1], O_RDONLY);
 	index.y = read(fd, buffer, (map->coord.x * map->coord.y) + map->coord.y);
 	if (index.y == -1)
-		return (0);
+		return (NULL);
 	index.y = 0;
 	k = 0;
 	while (index.y < map->coord.y)
