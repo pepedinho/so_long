@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:13 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/01 13:16:48 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 15:24:12 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ t_map	*map_allocation(const char **argv)
 	buffer[i] = NULL;
 	map->coord = pos;
 	map->map = buffer;
+	map->player_pos.y = -1;
+	map->player_pos.x = -1;
 	return (map);
 }
 

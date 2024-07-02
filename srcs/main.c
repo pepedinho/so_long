@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:30:30 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/01 14:20:12 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 15:25:02 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int main(int argc, char const *argv[])
 	map = map_formating(argv);
 	if (!map)
 		return (-1);
+	check_elem(map);
 	ft_printf("map formating success\n");
+	ft_printf("pos P = x:%d y:%d | pos E = x:%d y:%d\n", map->player_pos.x, map->player_pos.y, map->exit_pos.x, map->exit_pos.y);
 	data = create_window(map);
 	if (!data)
 		return (-1);

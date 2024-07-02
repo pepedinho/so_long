@@ -6,7 +6,7 @@
 /*   By: itahri <ithari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:05:09 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/01 14:15:33 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 15:51:06 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ int	handle_input(int keysym, t_mlx_data *data)
 {
 	if(keysym == XK_Escape)
 		escape_input(data);
+	else if (keysym == D_KEY)
+		moove_right(data);
+	else if (keysym == Q_KEY)
+		moove_left(data);
+	else if (keysym == Z_KEY)
+		moove_top(data);
+	else if (keysym == S_KEY)
+		moove_bottom(data);
 	ft_printf("the key: [%d] has been pressed\n", keysym);
 	return (1);
 }

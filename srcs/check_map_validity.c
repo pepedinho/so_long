@@ -6,7 +6,7 @@
 /*   By: itahri <ithari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:25:04 by itahri            #+#    #+#             */
-/*   Updated: 2024/06/26 18:22:16 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 15:25:23 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,15 @@ int	check_elem(t_map *map)
 			if (map->map[pos.y][pos.x] == 'C')
 				c_count++;
 			else if (map->map[pos.y][pos.x] == 'P')
+			{
+				map->player_pos = pos;
 				p_count++;
+			}
 			else if (map->map[pos.y][pos.x] == 'E')
+			{
+				map->exit_pos = pos;
 				e_count++;
+			}
 			pos.x++;
 		}
 		pos.y++;
