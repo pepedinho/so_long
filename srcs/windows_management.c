@@ -6,7 +6,7 @@
 /*   By: itahri <ithari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:05:09 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/02 15:51:06 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 17:48:23 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ int	init_img(t_mlx_data *data)
 	data->sprite_right_img = mlx_xpm_file_to_image(data->mlx_ptr, SPRITE_RIGHT, &img_width, &img_height);
 	if (!data->sprite_right_img || img_width != WIDTH || img_height != HEIGHT)
 		return (ft_printf("error during loading of sprite_right image\n"), escape_input(data), 0);
+	data->collectible_img = mlx_xpm_file_to_image(data->mlx_ptr, COLLECTIBLE, &img_width, &img_height);
+	if (!data->collectible_img || img_width != WIDTH || img_height != HEIGHT)
+		return (ft_printf("error during loading of master_ball(collectible) image\n"), escape_input(data), 0);
+	data->exit_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT_SPRITE, &img_width, &img_height);
+	if (!data->exit_img || img_width != WIDTH || img_height != HEIGHT)
+		return (ft_printf("error during loading of master_ball(collectible) image\n"), escape_input(data), 0);
 	return (1);
 }
 
@@ -49,6 +55,8 @@ void  img_to_null(t_mlx_data *data)
 	data->sprite_back_img = NULL;
 	data->sprite_right_img = NULL;
 	data->sprite_left_img = NULL;
+	data->collectible_img = NULL;
+	data->exit_img = NULL;
 }
 
 t_mlx_data  *create_window(t_map *map)
@@ -78,6 +86,7 @@ t_mlx_data  *create_window(t_map *map)
 
 int	handle_input(int keysym, t_mlx_data *data)
 {
+	ft_printf("debugz : x: %d, y: %d\n", data->map->player_pos.x, data->map->player_pos.y);
 	if(keysym == XK_Escape)
 		escape_input(data);
 	else if (keysym == D_KEY)
@@ -88,7 +97,10 @@ int	handle_input(int keysym, t_mlx_data *data)
 		moove_top(data);
 	else if (keysym == S_KEY)
 		moove_bottom(data);
-	ft_printf("the key: [%d] has been pressed\n", keysym);
+	check_collectible_cnt(data);
+	check_exit(data);
+	//ft_printf("the key: [%d] has been pressed\n", keysym);
+	//ft_printf("collectible actual count : %d | total : %d\n", data->map->collectible_cnt, data->map->collectible_tot);
 	return (1);
 }
 
@@ -112,6 +124,10 @@ void  free_img(t_mlx_data *data)
 	if (data->tree_img)
 		mlx_destroy_image(data->mlx_ptr, data->tree_img);
 	ft_printf("tree destroy succesfuly\n");
+	if (data->collectible_img)
+		mlx_destroy_image(data->mlx_ptr, data->collectible_img);
+	if (data->exit_img)
+		mlx_destroy_image(data->mlx_ptr, data->exit_img);
 }
 
 int	escape_input(t_mlx_data *data)

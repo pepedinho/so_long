@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:30:30 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/02 15:25:02 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 16:42:10 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int main(int argc, char const *argv[])
 		return (-1);
 	check_elem(map);
 	ft_printf("map formating success\n");
-	ft_printf("pos P = x:%d y:%d | pos E = x:%d y:%d\n", map->player_pos.x, map->player_pos.y, map->exit_pos.x, map->exit_pos.y);
 	data = create_window(map);
 	if (!data)
 		return (-1);
 	ft_printf("windows create with success\n");
 	mlx_key_hook(data->win_ptr, handle_input, data);
 	render_map(data);
+	ft_printf("pos P = x:%d y:%d | pos E = x:%d y:%d\n", map->player_pos.x, map->player_pos.y, map->exit_pos.x, map->exit_pos.y);
 	mlx_loop(data->mlx_ptr);
 	return 0;
 }

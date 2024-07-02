@@ -6,7 +6,7 @@
 /*   By: itahri <ithari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:25:04 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/02 15:25:23 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 16:59:51 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,8 @@ int	check_elem(t_map *map)
 		}
 		pos.y++;
 	}
-	map->collectible_cnt = c_count;
+	map->collectible_tot = c_count;
+	map->collectible_cnt = 0;
 	if (c_count > 0 && p_count == 1 && e_count == 1)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 13:14:45 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/02 15:51:12 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 17:47:18 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define SPRITE_RIGHT "assets/sprite_right.xpm"
 # define SPRITE_LEFT "assets/sprite_left.xpm"
 # define TREE "assets/tree.xpm"
+# define COLLECTIBLE "assets/master_ball.xpm"
+# define EXIT_SPRITE "assets/exit.xpm"
 
 typedef struct s_coord
 {
@@ -46,6 +48,7 @@ typedef struct s_map
 	struct s_coord	coord;
 	struct s_coord	player_pos;
 	struct s_coord	exit_pos;
+	int				collectible_tot;
 	int				collectible_cnt;
 }					t_map;
 
@@ -59,6 +62,8 @@ typedef struct s_mlx_data
 	void		  *sprite_left_img;
 	void		  *sprite_right_img;
 	void		  *tree_img;
+	void		  *collectible_img;
+	void		  *exit_img;
 	struct s_map  *map;
 }			  t_mlx_data;
 
@@ -81,6 +86,8 @@ int	escape_input(t_mlx_data *data);
 
 // map rendering
 void  render_map(t_mlx_data *data);
+int	check_collectible_cnt(t_mlx_data *data);
+void  check_exit(t_mlx_data *data);
 
 //moove management
 void  moove_right(t_mlx_data *data);
