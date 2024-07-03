@@ -86,21 +86,19 @@ t_mlx_data  *create_window(t_map *map)
 
 int	handle_input(int keysym, t_mlx_data *data)
 {
-	ft_printf("debugz : x: %d, y: %d\n", data->map->player_pos.x, data->map->player_pos.y);
+	static int	cnt;
 	if(keysym == XK_Escape)
-		escape_input(data);
+		(cnt++, ft_printf("moove count : %d\n", cnt), escape_input(data));
 	else if (keysym == D_KEY)
-		moove_right(data);
+		(cnt++, ft_printf("moove count : %d\n", cnt), moove_right(data));
 	else if (keysym == Q_KEY)
-		moove_left(data);
+		(cnt++, ft_printf("moove count : %d\n", cnt), moove_left(data));
 	else if (keysym == Z_KEY)
-		moove_top(data);
+		(cnt++, ft_printf("moove count : %d\n", cnt), moove_top(data));
 	else if (keysym == S_KEY)
-		moove_bottom(data);
+		(cnt++, ft_printf("moove count : %d\n", cnt), moove_bottom(data));
 	check_collectible_cnt(data);
 	check_exit(data);
-	//ft_printf("the key: [%d] has been pressed\n", keysym);
-	//ft_printf("collectible actual count : %d | total : %d\n", data->map->collectible_cnt, data->map->collectible_tot);
 	return (1);
 }
 
@@ -108,22 +106,16 @@ void  free_img(t_mlx_data *data)
 {
 	if (data->floor_img)
 		mlx_destroy_image(data->mlx_ptr, data->floor_img);
-	ft_printf("floor destroy succesfuly\n");
 	if (data->sprite_back_img)
 		mlx_destroy_image(data->mlx_ptr, data->sprite_back_img);
-	ft_printf("sprite back destroy succesfuly\n");
 	if (data->sprite_face_img)
 		mlx_destroy_image(data->mlx_ptr, data->sprite_face_img);
-	ft_printf("sprite face destroy succesfuly\n");
 	if (data->sprite_left_img)
 		mlx_destroy_image(data->mlx_ptr, data->sprite_left_img);
-	ft_printf("sprite left destroy succesfuly\n");
 	if (data->sprite_right_img)
 		mlx_destroy_image(data->mlx_ptr, data->sprite_right_img);
-	ft_printf("sprite right destroy succesfuly\n");
 	if (data->tree_img)
 		mlx_destroy_image(data->mlx_ptr, data->tree_img);
-	ft_printf("tree destroy succesfuly\n");
 	if (data->collectible_img)
 		mlx_destroy_image(data->mlx_ptr, data->collectible_img);
 	if (data->exit_img)
