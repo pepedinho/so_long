@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: itahri <itahri@student.42.fr>              +#+  +:+       +#+         #
+#    By: itahri <itahri@contact.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/25 13:12:50 by itahri            #+#    #+#              #
-#    Updated: 2024/07/02 15:38:43 by itahri           ###   ########.fr        #
+#    Updated: 2024/07/03 20:44:18 by itahri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 
-SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c windows_management.c map_rendering.c moove_management.c)
+SRCS = $(addprefix srcs/,  main.c map_parsing.c check_map_validity.c windows_management.c map_rendering.c moove_management.c init_map.c check_map_validity2.c windows_management2.c)
 
 INCLUDES = ./includes -I ./libft/includes/
 

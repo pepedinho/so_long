@@ -6,13 +6,26 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:13 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/02 16:44:58 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/03 18:15:37 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-t_coord	file_len(const char** argv)
+int	pos_increment(char *buffer, t_coord *pos, int i)
+{
+	if (buffer[i] == '\n')
+	{
+		if (pos->y == 0)
+			pos->x = i;
+		if (buffer[i + 1] == '\n')
+			return (0);
+		pos->y++;
+	}
+	return (1);
+}
+
+t_coord	file_len(const char **argv)
 {
 	int		map;
 	char	buffer[100];
@@ -28,24 +41,17 @@ t_coord	file_len(const char** argv)
 	{
 		nb_read = read(map, buffer, 100);
 		if (nb_read == -1)
-			exit(EXIT_FAILURE);
+			(close(map), exit(EXIT_FAILURE));
 		i = 0;
 		while (i < nb_read && buffer[i])
 		{
-			if (buffer[i] == '\n')
-			{
-				if (pos.y == 0)
-					pos.x = i;
-				if (buffer[i + 1] == '\n')
-					(ft_printf("Error\n"), exit(EXIT_FAILURE));
-				pos.y++;
-			}
-			i++;
+			if (!pos_increment(buffer, &pos, i++))
+				(close(map), ft_printf("Error incorrect map!"),
+					exit(EXIT_FAILURE));
 		}
 	}
 	return (close(map), pos);
 }
-
 
 t_map	*map_allocation(const char **argv)
 {
@@ -67,20 +73,13 @@ t_map	*map_allocation(const char **argv)
 		buffer[i] = malloc(sizeof(char) * (pos.x + 1));
 		if (!buffer[i])
 		{
-			while (i-- != 0)
+			while (i-- >= 0)
 				free(buffer[i]);
-			free (buffer);
+			(free(buffer), free(map), exit(EXIT_FAILURE));
 		}
 		i++;
 	}
-	buffer[i] = NULL;
-	map->coord = pos;
-	map->map = buffer;
-	map->player_pos.y = -1;
-	map->player_pos.x = -1;
-	map->exit_pos.x = -1;
-	map->exit_pos.y = -1;
-	return (map);
+	return (init_map(map, buffer, pos, i), map);
 }
 
 void	free_map(t_map *map)
@@ -98,31 +97,20 @@ t_map	*map_formating(const char **argv)
 {
 	t_map	*map;
 	char	*buffer;
-	t_coord	index;
-	int		k;
 	int		fd;
+	int		nb_read;
 
 	map = map_allocation(argv);
 	if (!map)
 		return (NULL);
-	buffer = ft_calloc(sizeof(char), ((map->coord.x * map->coord.y) + map->coord.y + 1));
+	buffer = ft_calloc(sizeof(char), ((map->coord.x * map->coord.y)
+				+ map->coord.y + 1));
 	if (!buffer)
 		return (free_map(map), NULL);
 	fd = open(argv[1], O_RDONLY);
-	index.y = read(fd, buffer, (map->coord.x * map->coord.y) + map->coord.y);
-	if (index.y == -1)
+	nb_read = read(fd, buffer, (map->coord.x * map->coord.y) + map->coord.y);
+	if (nb_read == -1)
 		return (NULL);
-	index.y = 0;
-	k = 0;
-	while (index.y < map->coord.y)
-	{
-		index.x = 0;
-		while (index.x < map->coord.x && buffer[k] != '\n')
-			map->map[index.y][index.x++] = buffer[k++];
-		while (buffer[k] == '\n')
-			k++;
-		map->map[index.y][index.x] = '\0';
-		index.y++;
-	}
+	formating(map, buffer);
 	return (close(fd), free(buffer), map);
 }
