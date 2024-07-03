@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 13:14:45 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/02 17:47:18 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/02 21:18:27 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define Q_KEY 113
 # define S_KEY 115
 # define D_KEY 100
+
+# define EXIT_CROSS 17
 
 # define FLOOR "assets/floor.xpm"
 # define SPRITE_BACK "assets/sprite_back.xpm"
