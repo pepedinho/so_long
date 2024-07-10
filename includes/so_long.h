@@ -21,8 +21,8 @@
 # define WIDTH 64
 # define HEIGHT 64
 
-# define Z_KEY 122
-# define Q_KEY 113
+# define W_KEY 119
+# define A_KEY 97
 # define S_KEY 115
 # define D_KEY 100
 

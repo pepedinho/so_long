@@ -86,9 +86,9 @@ int	handle_input(int keysym, t_mlx_data *data)
 		escape_input(data);
 	else if (keysym == D_KEY)
 		(ft_printf("moove count : %d\n", ++cnt), moove_right(data));
-	else if (keysym == Q_KEY)
+	else if (keysym == A_KEY)
 		(ft_printf("moove count : %d\n", ++cnt), moove_left(data));
-	else if (keysym == Z_KEY)
+	else if (keysym == W_KEY)
 		(ft_printf("moove count : %d\n", ++cnt), moove_top(data));
 	else if (keysym == S_KEY)
 		(ft_printf("moove count : %d\n", ++cnt), moove_bottom(data));
