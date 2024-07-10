@@ -6,7 +6,7 @@
 /*   By: itahri <itahri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:13 by itahri            #+#    #+#             */
-/*   Updated: 2024/07/03 18:15:37 by itahri           ###   ########.fr       */
+/*   Updated: 2024/07/10 14:46:38 by itahri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_coord	file_len(const char **argv)
 	t_coord	pos;
 
 	map = open(argv[1], O_RDONLY);
+	if (map == -1)
+		(ft_printf("Error '%s' dont exist!\n", argv[1]), exit(EXIT_FAILURE));
 	nb_read = -1;
 	pos.y = 0;
 	pos.x = 0;
